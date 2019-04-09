@@ -1,0 +1,97 @@
+body {
+	background-color: white;
+}
+
+#logo-header {
+	height: 50px;
+}
+#logo-pae {
+	height: 65px;
+	margin-right: 2em;
+}
+#header-bottom-line {
+	position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #680610;
+    color: #FFF;
+    margin-left: 105px;
+    text-align: left;
+    padding-left: 1em;
+}
+#predio-wrapper {
+	display: inline-table;
+    width: 100%;
+    margin-top: 3em;
+}
+#logo-footer { float: left; }
+#logo-footer-img {
+	height: 50px;
+}
+#logo2-footer-img {
+  height: 50px;
+}
+#topwrap {
+	padding-top: 1.5em;
+}
+#predio {
+	position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 1;
+}
+.navbar-default {
+  background-color: #680610;
+  border-color: #e7e7e7;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFF;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #FFF;
+  background-color: transparent;
+}
+.navbar-default .navbar-text {
+  color: #FFF;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #FFF;
+}
+#footer2 {
+	height: 160px;
+	background-color: #680610;
+	padding: 55px 0;
+	display: table;
+    width: 100%;
+}
+#address-footer .textwidget {
+	float: right;
+	color: #fff;
+	font-family: Roboto;
+    font-size: 12pt;
+    font-weight: normal;
+    line-height: 1.7em;
+}
+.form-control {
+	color: #333;
+}
+#showcase {
+	background-color: #680610;
+}
+
+.btn-success { 
+	background-color: #680610; 
+	border-color: #680610;
+}
+.btn-success:hover { 
+	background-color: #84232d; 
+	border-color: #84232d;
+}
+.fl { float: left; }
+.fr { float: right; }
+.clear { clear: both; }
+.hide { display: none }
