@@ -40,18 +40,18 @@
               <hr/>
             </div>
 
-            <div class="form-group{{ $errors->has('tipoVaga') ? ' has-error' : '' }}">
-              <label for="tipoVaga" class="col-md-4 control-label">Tipo de Vaga</label>
+            <div class="form-group{{ $errors->has('tipo') ? ' has-error' : '' }}">
+              <label for="tipo" class="col-md-4 control-label">Tipo de Vaga</label>
 
               <div class="col-md-6">
-                <select id="tipoVaga" class="form-control" name="tipoVaga" value="{{ old('tipoVaga') }}" required>
-                  <option value="estagio">Estágio</option>
-                  <option value="emprego">Emprego</option>
+                <select id="tipo" class="form-control" name="tipo" value="{{ old('tipo') }}" required>
+                  <option value="Estágio">Estágio</option>
+                  <option value="Emprego">Emprego</option>
                 </select>
 
-                @if ($errors->has('tipoVaga'))
+                @if ($errors->has('tipo'))
                   <span class="help-block">
-                                        <strong>{{ $errors->first('tipoVaga') }}</strong>
+                                        <strong>{{ $errors->first('tipo') }}</strong>
                                     </span>
                 @endif
               </div>
@@ -342,19 +342,19 @@
               <hr/>
             </div>
 
-            <div class="form-group{{ $errors->has('status_vaga') ? ' has-error' : '' }}">
-              <label for="status_vaga" class="col-md-4 control-label">Status</label>
+            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+              <label for="status" class="col-md-4 control-label">Status</label>
 
               <div class="col-md-6">
-                <select id="status_vaga" class="form-control" name="status_vaga" value="{{ old('status_vaga') }}" required>
+                <select id="status" class="form-control" name="status" value="{{ old('status') }}" required>
                   <option value="Disponível">Disponível</option>
                   <option value="Pausada">Pausada</option>
                   <option value="Vagas preenchidas">Vagas preenchidas</option>
                 </select>
 
-                @if ($errors->has('status_vaga'))
+                @if ($errors->has('status'))
                   <span class="help-block">
-                                        <strong>{{ $errors->first('status_vaga') }}</strong>
+                                        <strong>{{ $errors->first('status') }}</strong>
                                     </span>
                 @endif
               </div>

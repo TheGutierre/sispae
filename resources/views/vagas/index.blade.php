@@ -37,30 +37,20 @@
                         </thead>
                         <tbody>
 
-                        @foreach($estagios as $estagio)
+
+                        @foreach($vagas as $vaga)
 
                             <tr>
-                                <td><textCargo>{{ $estagio->Cargo }}</textCargo>
-                                    <p><textVagas>{{ $estagio->Vagas }} vagas</textVagas></p>
+                                <td><textCargo>{{ $vaga->Cargo }}</textCargo>
+                                    <p><textVagas>{{ $vaga->Vagas }} vagas</textVagas></p>
                                 </td>
                                 <td></td>
-                                <td>{{ $estagio->Status }}</td>
-                                <td><a href="/vagas/editar/{{$estagio->ID}}">Editar</a> |
-                                    <a href="/vagas/delete/{{$estagio->ID}}">Excluir</a> </td>
+                                <td>{{ $vaga->Status }}</td>
+                                <td><a href="/vagas/editar/{{$vaga->ID}}">Editar</a> |
+                                    <a href="/vagas/delete/{{$vaga->ID}}">Excluir</a> </td>
                             </tr>
                         @endforeach
-                        @foreach($empregos as $emprego)
 
-                            <tr>
-                                <td><textCargo>{{ $emprego->Cargo }}</textCargo>
-                                    <p><textVagas>{{ $emprego->Vagas }} vagas</textVagas></p>
-                                </td>
-                                <td></td>
-                                <td>{{ $emprego->Status }}</td>
-                                <td><a href="/vagas/editar/{{$emprego->ID}}">Editar</a> |
-                                    <a href="/vagas/delete/{{$emprego->ID}}">Excluir</a> </td>
-                            </tr>
-                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -68,7 +58,7 @@
 
         </div>
         <div class="col-md-offset-5">
-            {!! $estagios->links() !!}
+            {!! $vagas->links() !!}
         </div>
 
     </div>

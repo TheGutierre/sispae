@@ -15,6 +15,10 @@ use App\estagios_has_beneficios;
 use App\estagios_has_locais;
 use App\locais;
 use App\status_vaga;
+use App\vagas;
+use App\vagas_has_areas;
+use App\vagas_has_beneficios;
+use App\vagas_has_locais;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,11 +26,8 @@ class VagasController extends Controller
 {
     public function cadastrar(Request $request) {
 
-        if($request['tipoVaga'] == "estagio"){
-            $status_vaga = status_vaga::create([
-                'nome' => $request['status_vaga']
-            ]);
-            $estagio = estagios::create([
+            $vagas = vagas::create([
+                'tipo' => $request['tipo'],
                 'cargo' => $request['cargo'],
                 'descricao' => $request['descricao'],
                 'vagas' => $request['vagas'],
@@ -38,7 +39,7 @@ class VagasController extends Controller
                 'emailcurriculos' => $request['emailcurriculos'],
                 'pergradu_min' => $request['pergradu_min'],
                 'pergradu_max' => $request['pergradu_max'],
-                'status_vaga_id' => $status_vaga->id,
+                'status' => $request['status'],
                 'empresas_id' => Auth::user()->responsaveis()->first()->empresas_id,
 
             ]);
@@ -47,81 +48,36 @@ class VagasController extends Controller
                 'cidade' => $request['cidade'],
                 'bairro' => $request['bairro']
             ]);
-            estagios_has_locais::create([
-                'estagios_id' => $estagio->id,
-                'locais_id' => $locais->id
-            ]);
+            $vagas->locais->sync($locais);
+
             $areas = areas::create([
                 'nome' => $request['nomeArea']
             ]);
-            estagios_has_areas::create([
-                'estagios_id' => $estagio->id,
+            vagas_has_areas::create([
+                'vagas_id' => $vagas->id,
                 'areas_id' => $areas->id
             ]);
             $beneficios = beneficios::create([
                 'nome' => $request['nomeBenef'],
                 'valor' => $request['valorBenf']
             ]);
-            estagios_has_beneficios::create([
-                'estagios_id' => $estagio->id,
+            vagas_has_beneficios::create([
+                'vagas_id' => $vagas->id,
                 'beneficios_id' => $beneficios->id
             ]);
-        }
-        else if($request['tipoVaga'] == "emprego"){
-            $status_vaga = status_vaga::create([
-                'nome' => $request['status_vaga']
-            ]);
-            $emprego = empregos::create([
-                'cargo' => $request['cargo'],
-                'descricao' => $request['descricao'],
-                'vagas' => $request['vagas'],
-                'faixa_sal_min' => $request['faixa_sal_min'],
-                'faixa_sal_max' => $request['faixa_sal_max'],
-                'acombinar' => $request['acombinar'],
-                'pornecessidades' => $request['pornecessidades'],
-                'recebercurriculos' => $request['recebercurriculos'],
-                'emailcurriculos' => $request['emailcurriculos'],
-                'empresas_id' => Auth::user()->responsaveis()->first()->empresas_id,
-                'status_vaga_id' => $status_vaga->id
-            ]);
-            $locais = locais::create([
-                'estado' => $request['estado'],
-                'cidade' => $request['cidade'],
-                'bairro' => $request['bairro']
-            ]);
-            empregos_has_locais::create([
-                'empregos_id' => $emprego->id,
-                'locais_id' => $locais->id
-            ]);
-            $areas = areas::create([
-                'nome' => $request['nomeArea']
-            ]);
-            empregos_has_areas::create([
-                'empregos_id' => $emprego->id,
-                'areas_id' => $areas->id
-            ]);
-            $beneficios = beneficios::create([
-                'nome' => $request['nomeBenef'],
-                'valor' => $request['valorBenf']
-            ]);
-            empregos_has_beneficios::create([
-                'empregos_id' => $emprego->id,
-                'beneficios_id' => $beneficios->id
-            ]);
-        }
     	return view('vagas.create');
     }
 
     public function index()
     {
-        $vagasEst = empresas::join('estagios', 'empresas.id', 'estagios.empresas_id')
+        /*$vagasEst = empresas::join('estagios', 'empresas.id', 'estagios.empresas_id')
             ->join('estagios_has_locais', 'estagios.id', 'estagios_has_locais.estagios_id')
             ->join('locais', 'estagios_has_locais.locais_id', 'locais.id')
             ->join('status_vaga', 'estagios.status_vaga_id', 'status_vaga.id')
             ->select('estagios.cargo as Cargo', 'estagios.descricao as Descricao',
                 'empresas.nome_fantasia as Empresa', 'locais.cidade as Cidade', 'estagios.vagas as Vagas',
-                'status_vaga.nome as Status','estagios.id as ID', 'estagios.updated_at as Data')
-            ->orderBy('estagios.updated_at','DESC')
+                'status_vaga.nome as Status','estagios.id as ID', 'status_vaga.updated_at as Data')
+            ->orderBy('status_vaga.updated_at','DESC')
             ->paginate(15)
         ;
         $vagasEmp = empresas::join('empregos', 'empresas.id', 'empregos.empresas_id')
@@ -130,12 +86,18 @@ class VagasController extends Controller
             ->join('status_vaga', 'empregos.status_vaga_id', 'status_vaga.id')
             ->select('empregos.cargo as Cargo', 'empregos.descricao as Descricao',
                 'empresas.nome_fantasia as Empresa', 'locais.cidade as Cidade', 'empregos.vagas as Vagas',
-                'status_vaga.nome as Status','empregos.id as ID','empregos.updated_at as Data')
-            ->orderBy('empregos.updated_at','DESC')
+                'status_vaga.nome as Status','empregos.id as ID','status_vaga.updated_at as Data')
+            ->orderBy('status_vaga.updated_at','DESC')
+            ->paginate(15)
+        ;*/
+        $vagas = empresas::join('vagas', 'empresas.id', 'vagas.empresas_id')
+            ->select('vagas.cargo as Cargo', 'vagas.vagas as Vagas',
+                'vagas.status as Status', 'vagas.id as ID')
+            ->orderBy('vagas.updated_at','DESC')
             ->paginate(15)
         ;
 
-        return view('vagas.index', ['estagios' => $vagasEst],['empregos' => $vagasEmp]);
+        return view('vagas.index', ['vagas' => $vagas]);
         return ;
     }
     public function edit($id, Request $request){

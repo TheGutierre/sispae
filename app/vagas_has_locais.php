@@ -5,30 +5,32 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $estagios_id
+ * @property int $vagas_id
  * @property int $locais_id
- * @property estagios $estagios
- * @property locais $locais
+ * @property string $updated_at
+ * @property string $created_at
+ * @property Vaga $vaga
+ * @property Locai $locai
  */
-class estagios_has_locais extends Model
+class vagas_has_locais extends Model
 {
     /**
      * @var array
      */
-    protected $fillable = ['estagios_id','locais_id'];
+    protected $fillable = ['updated_at', 'created_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function estagios()
+    public function vaga()
     {
-        return $this->belongsTo('App\estagios', 'estagios_id');
+        return $this->belongsTo('App\vagas', 'vagas_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function locais()
+    public function locai()
     {
         return $this->belongsTo('App\locais', 'locais_id');
     }

@@ -19,10 +19,6 @@ Route::get('cadastro/empresas', function () {
 	return view('empresas.create');
 });
 
-Route::get('test', function () {
-	return \Illuminate\Support\Facades\Auth::user()->responsaveis()->first()->empresas_id;
-});
-
 Route::post('cadastro/empresas', 'EmpresaController@create')->name('empresas.create')->middleware('auth');
 
 Route::get('/egressos', ['as' => 'egressos.index', 'uses' => 'EgressosController@index']);
@@ -40,12 +36,15 @@ Route::group(['as' => 'social.','prefix' => 'social'], function() {
 // Route::resource('empresas',['uses' => 'EmpresaController@resource']);
 
 /* VAGAS*/
+Route::get('vagas/cadastrar', function () {
+	return view('vagas.create');
+});
 Route::group(['as' => 'vagas.','prefix' => 'vagas'], function() {
-	Route::get('cadastrar', ['as' => 'cadastrar', 'uses' => 'VagasController@cadastrar', 'middleware' => 'auth']);
+	//Route::get('cadastrar', ['as' => 'cadastrar', 'uses' => 'VagasController@cadastrar', 'middleware' => 'auth']);
 	Route::post('cadastrar', ['as' => 'cadastrar', 'uses' => 'VagasController@cadastrar', 'middleware' => 'auth']);
 	Route::get('index', ['as' => 'index', 'uses' => 'VagasController@index', 'middleware' => 'auth']);
-	Route::get('editar.{id}', ['as' => 'cadastrar', 'uses' => 'VagasController@edit', 'middleware' => 'auth']);
-	Route::post('editar', ['as' => 'cadastrar', 'uses' => 'VagasController@cadastrar', 'middleware' => 'auth']);
+	Route::get('editar.{id}', ['as' => 'edit', 'uses' => 'VagasController@edit', 'middleware' => 'auth']);
+	Route::post('editar', ['as' => 'edit', 'uses' => 'VagasController@edit', 'middleware' => 'auth']);
 });
 
 Route::post('enviarMensagem', ['as' => 'contato.enviar', 'uses' => 'HomeController@enviarMensagem']);
