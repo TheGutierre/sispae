@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEstagiosTable extends Migration {
+class CreateVagasTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,10 @@ class CreateEstagiosTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('estagios', function(Blueprint $table)
+		Schema::create('vagas', function(Blueprint $table)
 		{
 			$table->integer('id', true);
+			$table->string('tipo', 45);
 			$table->string('cargo', 80);
 			$table->text('descricao', 65535)->nullable();
 			$table->integer('vagas')->nullable();
@@ -24,10 +25,9 @@ class CreateEstagiosTable extends Migration {
 			$table->boolean('pornecessidades')->nullable();
 			$table->boolean('recebercurriculos')->nullable();
 			$table->string('emailcurriculos', 45)->nullable();
-			$table->integer('pergradu_min')->nullable();
-			$table->integer('pergradu_max')->nullable();
-			$table->integer('empresas_id')->index('fk_estagios_empresas1_idx');
-			$table->integer('status_vaga_id')->index('fk_estagios_status_vaga1_idx');
+			$table->string('status', 15);
+			$table->integer('empresas_id')->index('fk_empregos_empresas1_idx');
+			$table->timestamps();
 		});
 	}
 
@@ -39,7 +39,7 @@ class CreateEstagiosTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('estagios');
+		Schema::drop('vagas');
 	}
 
 }

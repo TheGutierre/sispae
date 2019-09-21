@@ -17,6 +17,7 @@ class CreateSubareaTable extends Migration {
 			$table->integer('id', true);
 			$table->string('nome', 45)->nullable();
 			$table->integer('areas_id')->index('fk_subarea_areas1_idx');
+			$table->timestamps();
 		});
 	}
 

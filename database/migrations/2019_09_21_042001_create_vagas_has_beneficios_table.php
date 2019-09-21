@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEmpregosHasBeneficiosTable extends Migration {
+class CreateVagasHasBeneficiosTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,12 @@ class CreateEmpregosHasBeneficiosTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('empregos_has_beneficios', function(Blueprint $table)
+		Schema::create('vagas_has_beneficios', function(Blueprint $table)
 		{
-			$table->integer('empregos_id')->index('fk_empregos_has_beneficios_empregos1_idx');
+			$table->integer('vagas_id')->index('fk_empregos_has_beneficios_empregos1_idx');
 			$table->integer('beneficios_id')->index('fk_empregos_has_beneficios_beneficios1_idx');
-			$table->primary(['empregos_id','beneficios_id']);
+			$table->timestamps();
+			$table->primary(['vagas_id','beneficios_id']);
 		});
 	}
 
@@ -28,7 +29,7 @@ class CreateEmpregosHasBeneficiosTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('empregos_has_beneficios');
+		Schema::drop('vagas_has_beneficios');
 	}
 
 }

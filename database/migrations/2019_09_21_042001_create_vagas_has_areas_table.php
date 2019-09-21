@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEmpregosHasAreasTable extends Migration {
+class CreateVagasHasAreasTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,12 @@ class CreateEmpregosHasAreasTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('empregos_has_areas', function(Blueprint $table)
+		Schema::create('vagas_has_areas', function(Blueprint $table)
 		{
-			$table->integer('empregos_id')->index('fk_empregos_has_areas_empregos1_idx');
+			$table->integer('vagas_id')->index('fk_empregos_has_areas_empregos1_idx');
 			$table->integer('areas_id')->index('fk_empregos_has_areas_areas1_idx');
-			$table->primary(['empregos_id','areas_id']);
+			$table->timestamps();
+			$table->primary(['vagas_id','areas_id']);
 		});
 	}
 
@@ -28,7 +29,7 @@ class CreateEmpregosHasAreasTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('empregos_has_areas');
+		Schema::drop('vagas_has_areas');
 	}
 
 }

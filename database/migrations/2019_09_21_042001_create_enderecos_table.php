@@ -24,6 +24,7 @@ class CreateEnderecosTable extends Migration {
 			$table->string('cidade', 45)->nullable();
 			$table->string('estado', 2)->nullable();
 			$table->integer('empresas_id')->index('fk_enderecos_empresas1_idx');
+			$table->timestamps();
 		});
 	}
 

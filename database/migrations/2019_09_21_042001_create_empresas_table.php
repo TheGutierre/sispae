@@ -18,8 +18,9 @@ class CreateEmpresasTable extends Migration {
 			$table->string('razao_social', 80)->nullable()->default('');
 			$table->string('nome_fantasia', 45)->nullable();
 			$table->string('cpf', 45)->nullable();
-			$table->string('cpnj', 45)->nullable();
+			$table->string('cnpj', 60)->nullable();
 			$table->string('ramo_atuacao', 45)->nullable();
+			$table->timestamps();
 		});
 	}
 

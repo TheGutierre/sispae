@@ -19,6 +19,7 @@ class CreateContatosTable extends Migration {
 			$table->string('telefone2', 20)->nullable();
 			$table->string('email', 45)->nullable();
 			$table->integer('empresas_id')->index('fk_contatos_empresas1_idx');
+			$table->timestamps();
 		});
 	}
 

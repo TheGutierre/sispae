@@ -70,26 +70,6 @@ class VagasController extends Controller
 
     public function index()
     {
-        /*$vagasEst = empresas::join('estagios', 'empresas.id', 'estagios.empresas_id')
-            ->join('estagios_has_locais', 'estagios.id', 'estagios_has_locais.estagios_id')
-            ->join('locais', 'estagios_has_locais.locais_id', 'locais.id')
-            ->join('status_vaga', 'estagios.status_vaga_id', 'status_vaga.id')
-            ->select('estagios.cargo as Cargo', 'estagios.descricao as Descricao',
-                'empresas.nome_fantasia as Empresa', 'locais.cidade as Cidade', 'estagios.vagas as Vagas',
-                'status_vaga.nome as Status','estagios.id as ID', 'status_vaga.updated_at as Data')
-            ->orderBy('status_vaga.updated_at','DESC')
-            ->paginate(15)
-        ;
-        $vagasEmp = empresas::join('empregos', 'empresas.id', 'empregos.empresas_id')
-            ->join('empregos_has_locais', 'empregos.id', 'empregos_has_locais.empregos_id')
-            ->join('locais', 'empregos_has_locais.locais_id', 'locais.id')
-            ->join('status_vaga', 'empregos.status_vaga_id', 'status_vaga.id')
-            ->select('empregos.cargo as Cargo', 'empregos.descricao as Descricao',
-                'empresas.nome_fantasia as Empresa', 'locais.cidade as Cidade', 'empregos.vagas as Vagas',
-                'status_vaga.nome as Status','empregos.id as ID','status_vaga.updated_at as Data')
-            ->orderBy('status_vaga.updated_at','DESC')
-            ->paginate(15)
-        ;*/
         $vagas = empresas::join('vagas', 'empresas.id', 'vagas.empresas_id')
             ->select('vagas.cargo as Cargo', 'vagas.vagas as Vagas',
                 'vagas.status as Status', 'vagas.id as ID')
@@ -102,18 +82,14 @@ class VagasController extends Controller
     }
     public function edit($id, Request $request){
 
-        $taskEstagio = empresas::where('id', Auth::user()->responsaveis()->first()->empresas_id) ->first()
-        ->join('empregos', 'empresas.id', 'empregos.empresas_id')
-            ->join('empregos_has_locais', 'empregos.id', 'empregos_has_locais.empregos_id')
-            ->join('locais', 'empregos_has_locais.locais_id', 'locais.id')
-            ->join('empregos_has_areas', 'empregos.id', 'empregos_has_areas.empregos_id')
-            ->join('areas', 'empregos_has_locais.locais_id', 'locais.id')
-            ->join('status_vaga', 'empregos.status_vaga_id', 'status_vaga.id')
+        $taskVaga = empresas::where('id', Auth::user()->responsaveis()->first()->empresas_id) ->first()
+        ->join('vagas', 'empresas.id', 'vagas.empresas_id')
+            ->join('vagas_has_locais', 'vagas.id', 'vagas_has_locais.vagas_id')
+            ->join('locais', 'vagas_has_locais.locais_id', 'locais.id')
+            ->join('vagas_has_areas', 'vagas.id', 'vagas_has_areas.vagas_id')
+            ->join('areas', 'vagas_has_locais.locais_id', 'locais.id')
         ;
-        $taskPes = Pessoa::where('idPessoa', $id)->first();
-
-        // show the edit form and pass the nerd
-        return view('adm.updatePalestrante', ['palestrante' => $taskPale, 'pessoa' => $taskPes]);
+        return view('vagas.edit', ['vaga' => $taskVaga]);
     }
 
 }

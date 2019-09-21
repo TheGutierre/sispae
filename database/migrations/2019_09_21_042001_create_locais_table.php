@@ -18,6 +18,7 @@ class CreateLocaisTable extends Migration {
 			$table->string('estado', 2)->nullable();
 			$table->string('cidade', 45)->nullable();
 			$table->string('bairro', 45)->nullable();
+			$table->timestamps();
 		});
 	}
 
