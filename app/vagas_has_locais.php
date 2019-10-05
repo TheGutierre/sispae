@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $locais_id
  * @property string $updated_at
  * @property string $created_at
- * @property Vaga $vaga
+ * @property Vagas $vagas
  * @property Locai $locai
  */
 class vagas_has_locais extends Model
@@ -30,7 +30,7 @@ class vagas_has_locais extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function locai()
+    public function locais()
     {
         return $this->belongsTo('App\locais', 'locais_id');
     }

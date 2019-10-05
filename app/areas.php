@@ -24,22 +24,15 @@ class areas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function empregos()
+    public function vagas()
     {
-        return $this->belongsToMany('App\empregos', 'empregos_has_areas', 'areas_id', 'empregos_id');
+        return $this->belongsToMany('App\vagas', 'vagas_has_areas', 'areas_id', 'vagas_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function estagios()
-    {
-        return $this->belongsToMany('App\estagios', 'estagios_has_areas', 'areas_id', 'estagios_id');
-    }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function subareas()
     {
         return $this->hasMany('App\subarea', 'areas_id');

@@ -38,9 +38,9 @@ class empresas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function empregos()
+    public function vagas()
     {
-        return $this->hasMany('App\empregos', 'empresas_id');
+        return $this->hasMany('App\vagas', 'empresas_id');
     }
 
     /**
@@ -54,14 +54,7 @@ class empresas extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function estagios()
-    {
-        return $this->hasMany('App\estagios', 'empresas_id');
-    }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function responsaveis()
     {
         return $this->hasMany('App\responsaveis', 'empresas_id');

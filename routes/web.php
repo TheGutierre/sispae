@@ -39,13 +39,17 @@ Route::group(['as' => 'social.','prefix' => 'social'], function() {
 Route::get('vagas/cadastrar', function () {
 	return view('vagas.create');
 });
+Route::get('vagas/delete/{id}','VagasController@destroy')->name('vagas.index')->middleware('auth');
+
+Route::get('vagas/editar/{id}', 'VagasController@edit')->name('vagas.edit')->middleware('auth');
+
+Route::post('vagas/editar/', 'VagasController@update')->name('vagas.edit')->middleware('auth');
+
 Route::group(['as' => 'vagas.','prefix' => 'vagas'], function() {
 	//Route::get('cadastrar', ['as' => 'cadastrar', 'uses' => 'VagasController@cadastrar', 'middleware' => 'auth']);
 	Route::post('cadastrar', ['as' => 'cadastrar', 'uses' => 'VagasController@cadastrar', 'middleware' => 'auth']);
 	Route::get('index', ['as' => 'index', 'uses' => 'VagasController@index', 'middleware' => 'auth']);
-	Route::get('editar.{id}', ['as' => 'edit', 'uses' => 'VagasController@edit', 'middleware' => 'auth']);
-	Route::post('editar', ['as' => 'edit', 'uses' => 'VagasController@edit', 'middleware' => 'auth']);
-});
+	});
 
 Route::post('enviarMensagem', ['as' => 'contato.enviar', 'uses' => 'HomeController@enviarMensagem']);
 

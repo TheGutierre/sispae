@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $estado
  * @property string $cidade
  * @property string $bairro
- * @property Emprego[] $empregos
- * @property Estagio[] $estagios
+ * @property vagas[] $vagas
  */
 class locais extends Model
 {
@@ -22,16 +21,8 @@ class locais extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function empregos()
+    public function vagas()
     {
-        return $this->belongsToMany('App\Emprego', 'empregos_has_locais', 'locais_id', 'empregos_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function estagios()
-    {
-        return $this->belongsToMany('App\Estagio', 'estagios_has_locais', 'locais_id', 'estagios_id');
+        return $this->belongsToMany('App\vagas', 'vagas_has_locais', 'locais_id', 'vagas_id');
     }
 }

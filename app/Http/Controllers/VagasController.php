@@ -21,6 +21,7 @@ use App\vagas_has_beneficios;
 use App\vagas_has_locais;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class VagasController extends Controller
 {
@@ -48,23 +49,18 @@ class VagasController extends Controller
                 'cidade' => $request['cidade'],
                 'bairro' => $request['bairro']
             ]);
-            $vagas->locais->sync($locais);
+            $vagas->locais()->sync($locais);
 
             $areas = areas::create([
                 'nome' => $request['nomeArea']
             ]);
-            vagas_has_areas::create([
-                'vagas_id' => $vagas->id,
-                'areas_id' => $areas->id
-            ]);
+            $areas->vagas()->sync($vagas);
+
             $beneficios = beneficios::create([
                 'nome' => $request['nomeBenef'],
                 'valor' => $request['valorBenf']
             ]);
-            vagas_has_beneficios::create([
-                'vagas_id' => $vagas->id,
-                'beneficios_id' => $beneficios->id
-            ]);
+            $beneficios->vagas()->sync($vagas);
     	return view('vagas.create');
     }
 
@@ -82,14 +78,76 @@ class VagasController extends Controller
     }
     public function edit($id, Request $request){
 
-        $taskVaga = empresas::where('id', Auth::user()->responsaveis()->first()->empresas_id) ->first()
+        $taskEmpresa = empresas::where('id', Auth::user()->responsaveis()->first()->empresas_id) ->first()
         ->join('vagas', 'empresas.id', 'vagas.empresas_id')
             ->join('vagas_has_locais', 'vagas.id', 'vagas_has_locais.vagas_id')
             ->join('locais', 'vagas_has_locais.locais_id', 'locais.id')
             ->join('vagas_has_areas', 'vagas.id', 'vagas_has_areas.vagas_id')
-            ->join('areas', 'vagas_has_locais.locais_id', 'locais.id')
+            ->join('areas', 'vagas_has_areas.areas_id', 'areas.id')
         ;
-        return view('vagas.edit', ['vaga' => $taskVaga]);
+        $taskVaga = vagas::where('id', $id)->first();
+        $taskArea = areas::where('id', vagas_has_areas::where('vagas_id',$id)->first()->areas_id)->first();
+        $taskLocal = locais::where('id', vagas_has_locais::where('vagas_id',$id)->first()->locais_id)->first();
+        $taskBeneficio = beneficios::where('id', vagas_has_beneficios::where('vagas_id',$id)->first()->beneficios_id)->first();
+        return view('vagas.edit', ['vaga' => $taskVaga, 'area' => $taskArea, 'local' => $taskLocal, 'beneficio' => $taskBeneficio]);
+    }
+    public function update(Request $request){
+
+        $vaga = vagas::where('id', $request['id'])->first();
+        $vaga->tipo = $request['tipo'];
+        $vaga->cargo = $request['cargo'];
+        $vaga->descricao = $request['descricao'];
+        $vaga->vagas = $request['vagas'];
+        $vaga->faixa_sal_min = $request['faixa_sal_min'];
+        $vaga->faixa_sal_max = $request['faixa_sal_max'];
+        $vaga->acombinar = $request['acombinar'];
+        $vaga->pornecessidades = $request['pornecessidades'];
+        $vaga->recebercurriculos = $request['recebercurriculos'];
+        $vaga->emailcurriculos = $request['emailcurriculos'];
+        $vaga->pergradu_min = $request['pergradu_min'];
+        $vaga->pergradu_max = $request['pergradu_max'];
+        $vaga->status = $request['status'];
+
+        $area = areas::where('id', vagas_has_areas::where('vagas_id',$request['id'])->first()->areas_id)->first();
+        $area->nome = $request['nomeArea'];
+
+        $local = locais::where('id', vagas_has_locais::where('vagas_id',$request['id'])->first()->locais_id)->first();
+        $local->estado = $request['estado'];
+        $local->cidade = $request['cidade'];
+        $local->bairro = $request['bairro'];
+
+        $beneficio = beneficios::where('id', vagas_has_beneficios::where('vagas_id',$request['id'])->first()->beneficios_id)->first();
+        $beneficio->nome = $request['nomeBenef'];
+        $beneficio->valor = $request['valorBenf'];
+
+        $vaga->save();
+        $area->save();
+        $local->save();
+        $beneficio->save();
+
+        return Redirect::to('/vagas/index');
     }
 
+    public function destroy($id)
+    {
+        $area = areas::where('id', vagas_has_areas::where('vagas_id',$id)->first()->areas_id)->first();
+
+        $beneficios = beneficios::where('id', vagas_has_beneficios::where('vagas_id',$id)->first()->beneficios_id)->first();
+
+        $locais = locais::where('id', vagas_has_locais::where('vagas_id',$id)->first()->locais_id)->first();
+
+        $vlocais = vagas_has_locais::where('vagas_id', $id);
+        $vlocais->delete();
+
+        $vaga = vagas::where('id',$id)->first();
+
+        $vaga->vagasHasAreas()->delete();
+        $vaga->vagasHasBeneficios()->delete();
+        $vaga->delete();
+        $area->delete();
+        $beneficios->delete();
+        $locais->delete();
+
+        return back()->withInput();
+    }
 }
