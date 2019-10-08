@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Egresso;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -83,9 +84,14 @@ class RegisterController extends Controller
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ];
+        $user = User::create($fields);
+        Egresso::create([
+            'matricula' => $data['matricula'],
+            'users_id' => $user->id
+        ]);
         if (config('auth.providers.users.field', 'email') === 'username' && isset($data['username'])) {
             $fields['username'] = $data['username'];
         }
-        return User::create($fields);
+        return $user;
     }
 }

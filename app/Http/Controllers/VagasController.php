@@ -150,4 +150,17 @@ class VagasController extends Controller
 
         return back()->withInput();
     }
+    public function vaga ($id){
+        $vaga = vagas::where('id',$id)->first();
+
+        $area = areas::where('id', vagas_has_areas::where('vagas_id',$id)->first()->areas_id)->first();
+
+        $beneficios = beneficios::where('id', vagas_has_beneficios::where('vagas_id',$id)->first()->beneficios_id)->first();
+
+        $locais = locais::where('id', vagas_has_locais::where('vagas_id',$id)->first()->locais_id)->first();
+
+        $empresa = empresas::where('id', $vaga->empresas_id)->first();
+        //return dd($vaga);
+        return view('vagas.vaga', ['vaga' => $vaga, 'area' => $area, 'beneficios' => $beneficios, 'local' => $locais, 'empresa' => $empresa]);
+    }
 }

@@ -41,7 +41,8 @@
                         @foreach($vagas as $vaga)
 
                             <tr>
-                                <td><textCargo>{{ $vaga->Cargo }}</textCargo>
+
+                                <td ><textCargo><a href="/vagas/vaga/{{$vaga->ID}}">{{ $vaga->Cargo }}</a></textCargo>
                                     <p><textVagas>{{ $vaga->Vagas }} vagas</textVagas></p>
                                 </td>
                                 <td></td>

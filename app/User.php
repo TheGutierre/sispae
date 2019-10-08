@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -13,36 +14,29 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $remember_token
  * @property string $created_at
  * @property string $updated_at
- * @property responsaveis[] $responsaveis
+ * @property Egresso[] $egressos
+ * @property Responsavei[] $responsaveis
  */
-
 class User extends Authenticatable
 {
-    use Notifiable;
-
     /**
-     * The attributes that are mass assignable.
-     *
      * @var array
      */
-    protected $primaryKey = 'id';
-    public $incrementing = 'id';
-
-    protected $fillable = [
-        'name', 'email', 'password', 'remember_token', 'created_at', 'updated_at'
-    ];
+    protected $fillable = ['name', 'email', 'password', 'remember_token', 'created_at', 'updated_at'];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function egressos()
+    {
+        return $this->hasMany('App\Egresso', 'users_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function responsaveis()
     {
         return $this->hasMany('App\responsaveis', 'users_id');
     }
-
 }

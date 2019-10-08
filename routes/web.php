@@ -39,6 +39,8 @@ Route::group(['as' => 'social.','prefix' => 'social'], function() {
 Route::get('vagas/cadastrar', function () {
 	return view('vagas.create');
 });
+Route::get('vagas/vaga/{id}','VagasController@vaga')->name('vagas.vaga')->middleware('auth');
+
 Route::get('vagas/delete/{id}','VagasController@destroy')->name('vagas.index')->middleware('auth');
 
 Route::get('vagas/editar/{id}', 'VagasController@edit')->name('vagas.edit')->middleware('auth');
