@@ -1,4 +1,5 @@
-/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize Gutierre*/
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -1213,8 +1214,8 @@ h5,
 .h5,
 h6,
 .h6 {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 h4 small,
 .h4 small,
@@ -2501,6 +2502,9 @@ output {
   line-height: 1.42857143;
   color: #d2d6de;
 }
+.form-color{
+  color: black;
+}
 .form-control {
   display: block;
   width: 100%;
@@ -2508,6 +2512,7 @@ output {
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
+  color: #000000;
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;

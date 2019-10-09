@@ -20,10 +20,15 @@
                 <div class="box box-primary">
                     <div class="box-header with-border" style="text-align: center;">
                         <h3 class="box-title">{{$vaga->cargo}}</h3>
+
                     </div>
                     <div class="box-body">
-                        <p style="text-align: center;"><textVagas>{{ $vaga->vagas }} vagas</textVagas></p>
-                        <p style="text-align: center;"><textVagas>{{ $empresa->nome_fantasia }}</textVagas></p>
+                        <div style="text-align: center;">
+                            <textV>{{ $vaga->vagas }} vagas</textV>
+                             ||
+                            <textV>{{ $empresa->nome_fantasia }}</textV>
+                        </div>
+
                         <table class="table table-responsive">
                             <thead>
                             <th></th>
@@ -33,10 +38,14 @@
                                 <tr>
 
                                     <td>
-                                        <div class="toc">
+                                        <div>
                                             <p>Salário</p>
                                             <ul>
-                                                <li><h5>De R${{$vaga->faixa_sal_min}} a R${{$vaga->faixa_sal_max}}</h5></li>
+                                                @if($vaga->acombinar == "1")
+                                                    <li><h5>A combinar</h5></li>
+                                                @else
+                                                    <li><h5>De R${{$vaga->faixa_sal_min}} a R${{$vaga->faixa_sal_max}}</h5></li>
+                                                @endif
                                             </ul>
                                             <p>Percentual de graduação necessária</p>
                                             <ul>
@@ -46,19 +55,45 @@
                                             <ul>
                                                 <li><h5>{{$vaga->status}}</h5></li>
                                             </ul>
+                                            <p>Beneficios</p>
+                                            <ul>
+                                                @if(empty($beneficios->nome))
+                                                    <li><h5>Não há benefícios para esta vaga!</h5></li>
+                                                @else
+                                                    <li><h5>{{$beneficios->nome}}</h5></li>
+                                                    <li><h5>{{$beneficios->valor}}</h5></li>
+                                                @endif
+                                            </ul>
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>{{$vaga->descricao}}</h5>
+                                        <p>Descrição:</p>
+                                        <h5 style="text-align: justify;">{{$vaga->descricao}}</h5>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="text-align: center;">Local da Vaga:</p>
+                                        <h5 style="text-align: center;">{{$local->bairro}}, {{$local->cidade}}, {{$local->estado}}</h5>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-6 col-md-offset-4">
+                                            <button type="submit" class="btn btn-primary">
+                                                Candidatar-se a esta vaga!
+                                            </button>
+                                        </div>
                                     </td>
 
                                 </tr>
                             </tbody>
                         </table>
+
                     </div>
                 </div>
 
             </div>
+
         </div>
     </section>
 @endsection

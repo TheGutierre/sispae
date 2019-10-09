@@ -33,7 +33,7 @@
 							<label for="razao_social" class="col-md-4 control-label">Razão Social</label>
 
 							<div class="col-md-6">
-								<input id="razao_social" type="text" class="form-control" name="razao_social" value="{{ old('razao_social') }}" required autofocus>
+								<input id="razao_social" type="text" class="form-control" style="color: black;" name="razao_social" value="{{ old('razao_social') }}" required autofocus>
 
 								@if ($errors->has('razao_social'))
 									<span class="help-block">
@@ -47,7 +47,7 @@
 							<label for="nome_fantasia" class="col-md-4 control-label">Nome Fantasia</label>
 
 							<div class="col-md-6">
-								<input id="nome_fantasia" type="text" class="form-control" name="nome_fantasia" value="{{ old('nome_fantasia') }}" required>
+								<input id="nome_fantasia" type="text" class="form-control" style="color: black;" name="nome_fantasia" value="{{ old('nome_fantasia') }}" required>
 
 								@if ($errors->has('nome_fantasia'))
 									<span class="help-block">
@@ -61,7 +61,7 @@
 							<label for="cnpj" class="col-md-4 control-label">CNPJ</label>
 
 							<div class="col-md-6">
-								<input id="cnpj" type="text" class="form-control" name="cnpj" value="{{ old('cnpj') }}" required>
+								<input id="cnpj" type="text" class="form-control" style="color: black;" name="cnpj" value="{{ old('cnpj') }}" required>
 
 								@if ($errors->has('cnpj'))
 									<span class="help-block">
@@ -75,7 +75,7 @@
 							<label for="ramo_atuacao" class="col-md-4 control-label">Ramo de Atuação</label>
 
 							<div class="col-md-6">
-								<input id="ramo_atuacao" type="text" class="form-control" name="ramo_atuacao" value="{{ old('ramo_atuacao') }}" required>
+								<input id="ramo_atuacao" type="text" class="form-control" style="color: black;" name="ramo_atuacao" value="{{ old('ramo_atuacao') }}" required>
 
 								@if ($errors->has('ramo_atuacao'))
 									<span class="help-block">
@@ -89,7 +89,7 @@
 							<label for="telefone" class="col-md-4 control-label">Telefone 1</label>
 
 							<div class="col-md-6">
-								<input id="telefone" type="text" class="form-control" name="telefone" value="{{ old('telefone') }}" required>
+								<input id="telefone" type="text" class="form-control" style="color: black;" name="telefone" value="{{ old('telefone') }}" required>
 
 								@if ($errors->has('telefone'))
 									<span class="help-block">
@@ -103,7 +103,7 @@
 							<label for="telefone2" class="col-md-4 control-label">Telefone 2</label>
 
 							<div class="col-md-6">
-								<input id="telefone2" type="text" class="form-control" name="telefone2" value="{{ old('telefone2') }}">
+								<input id="telefone2" type="text" class="form-control" style="color: black;" name="telefone2" value="{{ old('telefone2') }}">
 
 								@if ($errors->has('telefone2'))
 									<span class="help-block">
@@ -117,7 +117,7 @@
 							<label for="emailEmp" class="col-md-4 control-label">Email da Empresa</label>
 
 							<div class="col-md-6">
-								<input id="emailEmp" type="email" class="form-control" name="emailEmp" value="{{ old('emailEmp') }}">
+								<input id="emailEmp" type="email" class="form-control" style="color: black;" name="emailEmp" value="{{ old('emailEmp') }}">
 
 								@if ($errors->has('emailEmp'))
 									<span class="help-block">
@@ -131,7 +131,7 @@
 							<label for="logradouro" class="col-md-4 control-label">Endereço da Empresa</label>
 
 							<div class="col-md-6">
-								<input id="logradouro" type="text" class="form-control" name="logradouro" value="{{ old('logradouro') }}">
+								<input id="logradouro" type="text" class="form-control" style="color: black;" name="logradouro" value="{{ old('logradouro') }}">
 
 								@if ($errors->has('logradouro'))
 									<span class="help-block">
@@ -145,7 +145,7 @@
 							<label for="numero" class="col-md-4 control-label">Número</label>
 
 							<div class="col-md-6">
-								<input id="numero" type="text" class="form-control" name="numero" value="{{ old('numero') }}">
+								<input id="numero" type="text" class="form-control" style="color: black;" name="numero" value="{{ old('numero') }}">
 
 								@if ($errors->has('numero'))
 									<span class="help-block">
@@ -159,7 +159,7 @@
 							<label for="bairro" class="col-md-4 control-label">Bairro</label>
 
 							<div class="col-md-6">
-								<input id="bairro" type="text" class="form-control" name="bairro" value="{{ old('bairro') }}">
+								<input id="bairro" type="text" class="form-control" style="color: black;" name="bairro" value="{{ old('bairro') }}">
 
 								@if ($errors->has('bairro'))
 									<span class="help-block">
@@ -173,7 +173,7 @@
 							<label for="cep" class="col-md-4 control-label">CEP</label>
 
 							<div class="col-md-6">
-								<input id="cep" type="text" class="form-control" name="cep" value="{{ old('cep') }}">
+								<input id="cep" type="text" class="form-control" style="color: black;" name="cep" value="{{ old('cep') }}">
 
 								@if ($errors->has('cep'))
 									<span class="help-block">
@@ -187,7 +187,7 @@
 							<label for="complemento" class="col-md-4 control-label">Complemento</label>
 
 							<div class="col-md-6">
-								<input id="complemento" type="text" class="form-control" name="complemento" value="{{ old('complemento') }}">
+								<input id="complemento" type="text" class="form-control" style="color: black;" name="complemento" value="{{ old('complemento') }}">
 
 								@if ($errors->has('complemento'))
 									<span class="help-block">
@@ -201,7 +201,7 @@
 							<label for="referencia" class="col-md-4 control-label">Ponto de Referência</label>
 
 							<div class="col-md-6">
-								<input id="referencia" type="text" class="form-control" name="referencia" value="{{ old('referencia') }}">
+								<input id="referencia" type="text" class="form-control" style="color: black;" name="referencia" value="{{ old('referencia') }}">
 
 								@if ($errors->has('referencia'))
 									<span class="help-block">
@@ -215,7 +215,7 @@
 							<label for="cidade" class="col-md-4 control-label">Cidade</label>
 
 							<div class="col-md-6">
-								<input id="cidade" type="text" class="form-control" name="cidade" value="{{ old('cidade') }}" required>
+								<input id="cidade" type="text" class="form-control" style="color: black;" name="cidade" value="{{ old('cidade') }}" required>
 
 								@if ($errors->has('cidade'))
 									<span class="help-block">
@@ -229,7 +229,7 @@
 							<label for="estado" class="col-md-4 control-label">Estado</label>
 
 							<div class="col-md-6">
-								<input id="estado" type="text" class="form-control" name="estado" value="{{ old('estado') }}" required>
+								<input id="estado" type="text" class="form-control" style="color: black;" name="estado" value="{{ old('estado') }}" required>
 
 								@if ($errors->has('estado'))
 									<span class="help-block">
@@ -249,7 +249,7 @@
 							<label for="nome" class="col-md-4 control-label">Nome</label>
 
 							<div class="col-md-6">
-								<input id="nome" type="text" class="form-control" name="nome" value="{{ old('nome') }}" required>
+								<input id="nome" type="text" class="form-control" style="color: black;" name="nome" value="{{ old('nome') }}" required>
 
 								@if ($errors->has('nome'))
 									<span class="help-block">
@@ -263,7 +263,7 @@
 							<label for="matricula" class="col-md-4 control-label">CPF</label>
 
 							<div class="col-md-6">
-								<input id="cpf" type="text" class="form-control" name="cpf" maxlength="14" value="{{ old('cpf') }}" required>
+								<input id="cpf" type="text" class="form-control" style="color: black;" name="cpf" maxlength="14" value="{{ old('cpf') }}" required>
 
 								@if ($errors->has('cpf'))
 									<span class="help-block">
@@ -277,7 +277,7 @@
 							<label for="cargo" class="col-md-4 control-label">Cargo</label>
 
 							<div class="col-md-6">
-								<input id="cargo" type="text" class="form-control" name="cargo" value="{{ old('cargo') }}" required>
+								<input id="cargo" type="text" class="form-control" style="color: black;" name="cargo" value="{{ old('cargo') }}" required>
 
 								@if ($errors->has('cargo'))
 									<span class="help-block">
@@ -314,7 +314,7 @@
 							<label for="email" class="col-md-4 control-label">E-Mail</label>
 
 							<div class="col-md-6">
-								<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+								<input id="email" type="email" class="form-control" style="color: black;" name="email" value="{{ old('email') }}" required>
 
 								@if ($errors->has('email'))
 									<span class="help-block">
@@ -328,7 +328,7 @@
 							<label for="password" class="col-md-4 control-label">Senha</label>
 
 							<div class="col-md-6">
-								<input id="password" type="password" class="form-control" name="password" required>
+								<input id="password" type="password" class="form-control" style="color: black;" name="password" required>
 
 								@if ($errors->has('password'))
 									<span class="help-block">
@@ -342,7 +342,7 @@
 							<label for="password-confirm" class="col-md-4 control-label">Confirmação de Senha</label>
 
 							<div class="col-md-6">
-								<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+								<input id="password-confirm" type="password" class="form-control" style="color: black;" name="password_confirmation" required>
 							</div>
 						</div>
 

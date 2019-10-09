@@ -44,7 +44,7 @@
               <label for="tipo" class="col-md-4 control-label">Tipo de Vaga</label>
 
               <div class="col-md-6">
-                <select id="tipo" class="form-control" name="tipo" value="{{ old('tipo') }}" required>
+                <select id="tipo" class="form-control" style="color: black;" name="tipo" value="{{ old('tipo') }}" required>
                   <option value="Estágio">Estágio</option>
                   <option value="Emprego">Emprego</option>
                 </select>
@@ -61,7 +61,7 @@
               <label for="cargo" class="col-md-4 control-label">Cargo Oferecido</label>
 
               <div class="col-md-6">
-                <input id="cargo" type="text" class="form-control" name="cargo" value="{{ old('cargo') }}" required autofocus>
+                <input id="cargo" type="text" class="form-control" style="color: black;" name="cargo" value="{{ old('cargo') }}" required autofocus>
 
                 @if ($errors->has('cargo'))
                   <span class="help-block">
@@ -75,7 +75,7 @@
               <label for="descricao" class="col-md-4 control-label">Descrição da Vaga</label>
 
               <div class="col-md-6">
-                <input id="descricao" type="text" class="form-control" name="descricao" value="{{ old('descricao') }}" required>
+                <input id="descricao" type="text" class="form-control" style="color: black;" name="descricao" value="{{ old('descricao') }}" required>
 
                 @if ($errors->has('descricao'))
                   <span class="help-block">
@@ -89,7 +89,7 @@
               <label for="vagas" class="col-md-4 control-label">Número de Vagas</label>
 
               <div class="col-md-6">
-                <input id="vagas" type="text" class="form-control" name="vagas" value="{{ old('vagas') }}" required>
+                <input id="vagas" type="text" class="form-control" style="color: black;" name="vagas" value="{{ old('vagas') }}" required>
 
                 @if ($errors->has('vagas'))
                   <span class="help-block">
@@ -109,7 +109,7 @@
               <label for="nomeArea" class="col-md-4 control-label">Área</label>
 
               <div class="col-md-6">
-                <input id="nomeArea" type="text" class="form-control" name="nomeArea" placeholder="Ex.: T.I., Departamento de vendas" value="{{ old('nomeArea') }}" required>
+                <input id="nomeArea" type="text" class="form-control" style="color: black;" name="nomeArea" placeholder="Ex.: T.I., Departamento de vendas" value="{{ old('nomeArea') }}" required>
 
                 @if ($errors->has('nomeArea'))
                   <span class="help-block">
@@ -143,7 +143,7 @@
                 <label for="faixa_sal_min" class="col-md-4 control-label">Faixa Salarial Mínimo</label>
 
                 <div class="col-md-6">
-                  <input id="faixa_sal_min" type="text" class="form-control fax" name="faixa_sal_min" value="{{ old('faixa_sal_min') }}" >
+                  <input id="faixa_sal_min" type="text" class="form-control fax" style="color: black;" name="faixa_sal_min" value="{{ old('faixa_sal_min') }}" >
 
                   @if ($errors->has('faixa_sal_min'))
                     <span class="help-block">
@@ -157,7 +157,7 @@
                 <label for="faixa_sal_max" class="col-md-4 control-label">Faixa Salarial Máximo</label>
 
                 <div class="col-md-6">
-                  <input id="faixa_sal_max" type="text" class="form-control fax" name="faixa_sal_max" value="{{ old('faixa_sal_max') }}" >
+                  <input id="faixa_sal_max" type="text" class="form-control fax" style="color: black;" name="faixa_sal_max" value="{{ old('faixa_sal_max') }}" >
 
                   @if ($errors->has('faixa_sal_max'))
                     <span class="help-block">
@@ -211,7 +211,7 @@
               <label for="emailcurriculos" class="col-md-4 control-label">E-Mail</label>
 
               <div class="col-md-6">
-                <input id="emailcurriculos" type="email" class="form-control emailc" name="emailcurriculos" value="{{ old('emailcurriculos') }}">
+                <input id="emailcurriculos" type="email" class="form-control emailc" style="color: black;" name="emailcurriculos" value="{{ old('emailcurriculos') }}">
 
                 @if ($errors->has('emailcurriculos'))
                   <span class="help-block">
@@ -230,7 +230,7 @@
               <label for="pergradu_min" class="col-md-4 control-label">Mínimo</label>
 
               <div class="col-md-6">
-                <input id="pergradu_min" type="text" class="form-control" name="pergradu_min" value="{{ old('pergradu_min') }}">
+                <input id="pergradu_min" type="text" class="form-control" style="color: black;" name="pergradu_min" value="{{ old('pergradu_min') }}">
 
                 @if ($errors->has('pergradu_min'))
                   <span class="help-block">
@@ -244,7 +244,7 @@
               <label for="pergradu_max" class="col-md-4 control-label">Máximo</label>
 
               <div class="col-md-6">
-                <input id="pergradu_max" type="text" class="form-control" name="pergradu_max" value="{{ old('pergradu_max') }}">
+                <input id="pergradu_max" type="text" class="form-control" style="color: black;" name="pergradu_max" value="{{ old('pergradu_max') }}">
 
                 @if ($errors->has('pergradu_max'))
                   <span class="help-block">
@@ -264,7 +264,7 @@
               <label for="cidade" class="col-md-4 control-label">Cidade</label>
 
               <div class="col-md-6">
-                <input id="cidade" type="text" class="form-control" name="cidade" value="{{ old('cidade') }}">
+                <input id="cidade" type="text" class="form-control" style="color: black;" name="cidade" value="{{ old('cidade') }}">
 
                 @if ($errors->has('cidade'))
                   <span class="help-block">
@@ -278,7 +278,7 @@
               <label for="bairro" class="col-md-4 control-label">Bairro</label>
 
               <div class="col-md-6">
-                <input id="bairro" type="text" class="form-control" name="bairro" value="{{ old('bairro') }}">
+                <input id="bairro" type="text" class="form-control" style="color: black;" name="bairro" value="{{ old('bairro') }}">
 
                 @if ($errors->has('bairro'))
                   <span class="help-block">
@@ -292,7 +292,7 @@
               <label for="estado" class="col-md-4 control-label">Estado</label>
 
               <div class="col-md-6">
-                <input id="estado" type="text" class="form-control" name="estado" value="{{ old('estado') }}" required>
+                <input id="estado" type="text" class="form-control" style="color: black;" name="estado" value="{{ old('estado') }}" required>
 
                 @if ($errors->has('estado'))
                   <span class="help-block">
@@ -312,7 +312,7 @@
               <label for="nomeBenef" class="col-md-4 control-label">Nome do Benefício</label>
 
               <div class="col-md-6">
-                <input id="nomeBenef" type="text" class="form-control" name="nomeBenef" maxlength="14" value="{{ old('nomeBenef') }}" >
+                <input id="nomeBenef" type="text" class="form-control" style="color: black;" name="nomeBenef" maxlength="14" value="{{ old('nomeBenef') }}" >
 
                 @if ($errors->has('nomeBenef'))
                   <span class="help-block">
@@ -326,7 +326,7 @@
               <label for="valorBenf" class="col-md-4 control-label">Valor do Benefício</label>
 
               <div class="col-md-6">
-                <input id="valorBenf" type="text" class="form-control" name="valorBenf" value="{{ old('valorBenf') }}" >
+                <input id="valorBenf" type="text" class="form-control" style="color: black;" name="valorBenf" value="{{ old('valorBenf') }}" >
 
                 @if ($errors->has('valorBenf'))
                   <span class="help-block">
@@ -346,7 +346,7 @@
               <label for="status" class="col-md-4 control-label">Status</label>
 
               <div class="col-md-6">
-                <select id="status" class="form-control" name="status" value="{{ old('status') }}" required>
+                <select id="status" class="form-control" style="color: black;" name="status" value="{{ old('status') }}" required>
                   <option value="Disponível">Disponível</option>
                   <option value="Pausada">Pausada</option>
                   <option value="Vagas preenchidas">Vagas preenchidas</option>
