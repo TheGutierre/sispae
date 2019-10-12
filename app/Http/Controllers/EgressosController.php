@@ -11,4 +11,5 @@ class EgressosController extends Controller
     	$egressos = DB::table('output')->get();
     	return view('egressos.index',['egressos' => $egressos]);
     }
+
 }

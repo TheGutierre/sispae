@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\areas;
 use App\beneficios;
+use App\Cadastra;
+use App\Egresso;
 use App\empregos;
 use App\empregos_has_areas;
 use App\empregos_has_beneficios;
@@ -15,6 +17,7 @@ use App\estagios_has_beneficios;
 use App\estagios_has_locais;
 use App\locais;
 use App\status_vaga;
+use App\User;
 use App\vagas;
 use App\vagas_has_areas;
 use App\vagas_has_beneficios;
@@ -22,6 +25,7 @@ use App\vagas_has_locais;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class VagasController extends Controller
 {
@@ -160,7 +164,26 @@ class VagasController extends Controller
         $locais = locais::where('id', vagas_has_locais::where('vagas_id',$id)->first()->locais_id)->first();
 
         $empresa = empresas::where('id', $vaga->empresas_id)->first();
-        //return dd($vaga);
-        return view('vagas.vaga', ['vaga' => $vaga, 'area' => $area, 'beneficios' => $beneficios, 'local' => $locais, 'empresa' => $empresa]);
+
+        $verifica = Cadastra::where('vagas_id', $vaga->id)
+            ->join('egresso','cadastra.egresso_id', 'egresso.id')
+            ->count()
+        ;
+        //return dd($verifica);
+        return view('vagas.vaga', ['vaga' => $vaga, 'area' => $area, 'beneficios' => $beneficios, 'local' => $locais, 'empresa' => $empresa, 'verifica' => $verifica]);
+    }
+
+    public function candidatar(Request $request){
+       // $egresso = Egresso::where('users_id', Auth::user()->id)->first();
+
+       // $vagas = vagas::where('id', $request['id']);
+
+        Cadastra::create([
+            'egresso_id' => Auth::user()->egressos()->first()->id,
+            'vagas_id' => $request['id'],
+
+        ]);
+        Session::flash('message1', 'Você se candidatou a está vaga, agora é só aguardar. A empresa deverá entrar em contato com você. Boa sorte!');
+        return back()->withInput();
     }
 }

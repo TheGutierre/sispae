@@ -38,6 +38,6 @@ class Egresso extends Model
      */
     public function vagas()
     {
-        return $this->belongsToMany('App\Vaga', 'cadastra', null, 'vagas_id');
+        return $this->belongsToMany('App\vagas', 'cadastra', null, 'vagas_id');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('htmlheader_title')
-    {{ '' }}
+    {{$vaga->cargo}} em {{ $empresa->nome_fantasia }}
 @endsection
 
 @section('contentheader_title')
@@ -14,6 +14,9 @@
 
 @section('main-content')
     <section class="content">
+        @if (Session::has('message1'))
+            <div class="alert alert-info">{{ Session::get('message1') }}</div>
+        @endif
         <div class="row">
             <div class="col-lg-12">
 
@@ -78,11 +81,23 @@
                                         <h5 style="text-align: center;">{{$local->bairro}}, {{$local->cidade}}, {{$local->estado}}</h5>
                                     </td>
                                     <td>
-                                        <div class="col-md-6 col-md-offset-4">
-                                            <button type="submit" class="btn btn-primary">
-                                                Candidatar-se a esta vaga!
-                                            </button>
-                                        </div>
+                                        @if($verifica == "1")
+                                            <div class="col-md-6 col-md-offset-4">
+                                                <button type="button" class="btn btn-danger">
+                                                    Você já se candidatou a esta vaga. Boa sorte!
+                                                </button>
+                                            </div>
+                                        @else
+                                        <form method="POST" action="{{ route('vagas.vaga') }}">
+                                            {{ csrf_field() }}
+                                            <input name="id" type="hidden" class="form-control" id="id" value="{{$vaga->id}}">
+                                            <div class="col-md-6 col-md-offset-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Candidatar-se a esta vaga!
+                                                </button>
+                                            </div>
+                                        </form>
+                                        @endif
                                     </td>
 
                                 </tr>

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $egresso_id
  * @property int $vagas_id
- * @property Egresso $egresso
- * @property Vaga $vaga
+ * @property string $created_at
+ * @property string $updated_at
  */
 class Cadastra extends Model
 {
@@ -22,21 +22,6 @@ class Cadastra extends Model
     /**
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['egresso_id', 'vagas_id', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function egresso()
-    {
-        return $this->belongsTo('App\Egresso');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function vaga()
-    {
-        return $this->belongsTo('App\Vaga', 'vagas_id');
-    }
 }

@@ -41,6 +41,8 @@ Route::get('vagas/cadastrar', function () {
 });
 Route::get('vagas/vaga/{id}','VagasController@vaga')->name('vagas.vaga')->middleware('auth');
 
+Route::post('vagas/vaga/', 'VagasController@candidatar')->name('vagas.vaga')->middleware('auth');
+
 Route::get('vagas/delete/{id}','VagasController@destroy')->name('vagas.index')->middleware('auth');
 
 Route::get('vagas/editar/{id}', 'VagasController@edit')->name('vagas.edit')->middleware('auth');
