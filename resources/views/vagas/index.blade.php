@@ -14,11 +14,14 @@
 
 @section('main-content')
 <section class="content">
+    @if($veruser == "1")
     <div class="col-md-2">
         <a href="{{route('vagas.cadastrar')}}" class="btn btn-primary">
             Cadastrar
         </a>
     </div>
+    @endif
+
     <div class="col-md-12 col-md-offset-0">
 
         <div class="panel panel-default">
@@ -33,7 +36,9 @@
                         <th></th>
                         <th></th>
                         <th>Status</th>
+                        @if($veruser == "1")
                         <th>Opções</th>
+                            @endif
                         </thead>
                         <tbody>
 
@@ -47,8 +52,11 @@
                                 </td>
                                 <td></td>
                                 <td>{{ $vaga->Status }}</td>
-                                <td><a href="/vagas/editar/{{$vaga->ID}}">Editar</a> |
-                                    <a href="/vagas/delete/{{$vaga->ID}}">Excluir</a> </td>
+                                @if($usuario->empresas_id == $vaga->empresas_id)
+                                <td>
+                                    <a href="/vagas/editar/{{$vaga->ID}}"><span class="glyphicon glyphicon-pencil"></span></a> |
+                                    <a href="/vagas/delete/{{$vaga->ID}}"><span class="glyphicon glyphicon-remove"></span></a> </td>
+                                @endif
                             </tr>
                         @endforeach
 

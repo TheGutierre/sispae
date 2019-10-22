@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Egresso;
 use App\User;
+use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class RegisterController
@@ -82,6 +84,7 @@ class RegisterController extends Controller
         $fields = [
             'name'     => $data['name'],
             'email'    => $data['email'],
+            'tipo'    => 'egresso',
             'password' => bcrypt($data['password']),
         ];
         $user = User::create($fields);
@@ -93,5 +96,20 @@ class RegisterController extends Controller
             $fields['username'] = $data['username'];
         }
         return $user;
+    }
+    protected function createAdm(Request $data)
+    {
+        $fields = [
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'tipo'    => 'administrador',
+            'password' => bcrypt($data['password']),
+        ];
+        $user = User::create($fields);
+
+        if (config('auth.providers.users.field', 'email') === 'username' && isset($data['username'])) {
+            $fields['username'] = $data['username'];
+        }
+        return Redirect::to('/login');
     }
 }

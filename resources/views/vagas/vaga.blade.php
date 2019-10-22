@@ -67,6 +67,14 @@
                                                     <li><h5>{{$beneficios->valor}}</h5></li>
                                                 @endif
                                             </ul>
+                                            <p>E-mail para envio de currículo</p>
+                                            <ul>
+                                                @if($vaga->recebercurriculos == "0")
+                                                    <li><h5>Não há e-mail para envio de currículo!</h5></li>
+                                                @else
+                                                    <li><h5>{{$vaga->emailcurriculos}}</h5></li>
+                                                @endif
+                                            </ul>
                                         </div>
                                     </td>
                                     <td>
@@ -81,6 +89,8 @@
                                         <h5 style="text-align: center;">{{$local->bairro}}, {{$local->cidade}}, {{$local->estado}}</h5>
                                     </td>
                                     <td>
+
+                                        @if($veruser == "0")
                                         @if($verifica == "1")
                                             <div class="col-md-6 col-md-offset-4">
                                                 <button type="button" class="btn btn-danger">
@@ -98,6 +108,9 @@
                                             </div>
                                         </form>
                                         @endif
+                                            @else
+                                            ...
+                                            @endif
                                     </td>
 
                                 </tr>

@@ -33,9 +33,12 @@
             <li class="header">Menu</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-dashboard'></i> <span>{{ trans('message.home') }}</span></a></li>
+
+            @if(\Illuminate\Support\Facades\Auth::user()->tipo == "administrador")
             <li><a href="{{ route('egressos.index') }}"><i class='fa fa-book'></i> <span>{{ trans('message.consultar_egresso') }}</span></a></li>
             {{-- <li><a href="{{ route('graficos.index') }}"><i class='fa fa-pie-chart'></i> <span>Gráficos</span></a></li> 
             <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('message.anotherlink') }}</span></a></li>--}}
+
             <li class="treeview">
                 <a href="#"><i class='fa fa-pie-chart'></i> <span>Gráficos</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
@@ -43,6 +46,7 @@
                     <li><a href="{{ route('graficos.porregiao') }}">Egressos por região</a></li>
                 </ul>
             </li>
+
             <li class="treeview">
                 <a href="#"><i class="fa fa-user-circle"></i>
                     <span>Empresas</span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -51,6 +55,7 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i>Consultar Empresas</a></li>
                 </ul>
             </li>
+            @endif
             <li class="treeview">
                 <a href="#"><i class="fa fa-user-circle"></i> 
                     <span>PEP</span> <i class="fa fa-angle-left pull-right"></i></a>

@@ -72,12 +72,24 @@ class VagasController extends Controller
     {
         $vagas = empresas::join('vagas', 'empresas.id', 'vagas.empresas_id')
             ->select('vagas.cargo as Cargo', 'vagas.vagas as Vagas',
-                'vagas.status as Status', 'vagas.id as ID')
+                'vagas.status as Status', 'vagas.id as ID', 'vagas.empresas_id as empresas_id')
             ->orderBy('vagas.updated_at','DESC')
             ->paginate(15)
         ;
+        if(Auth::user()->tipo == "responsavel" || Auth::user()->tipo == "administrador"){
+            $usuario = Auth::user()->responsaveis()->first();
+            $veruser = 1;
+            if(Auth::user()->tipo == "administrador"){
+                $usuario = Auth::user()->first();
+            }
+        }
+        else{
+            $usuario = Auth::user()->first();
+            $veruser = 0;
+        }
 
-        return view('vagas.index', ['vagas' => $vagas]);
+
+        return view('vagas.index', ['vagas' => $vagas, 'usuario' => $usuario, 'veruser' => $veruser]);
         return ;
     }
     public function edit($id, Request $request){
@@ -165,18 +177,23 @@ class VagasController extends Controller
 
         $empresa = empresas::where('id', $vaga->empresas_id)->first();
 
-        $verifica = Cadastra::where('vagas_id', $vaga->id)
-            ->join('egresso','cadastra.egresso_id', 'egresso.id')
-            ->count()
-        ;
+        if(Auth::user()->tipo == "egresso"){
+            $verifica = Cadastra::where('egresso_id', Auth::user()->egressos()->first()->id)
+                ->where('vagas_id', $id)
+                ->count()
+            ;
+            $veruser = 0;
+        }
+        else{
+            $verifica = 0;
+            $veruser = 1;
+        }
+
         //return dd($verifica);
-        return view('vagas.vaga', ['vaga' => $vaga, 'area' => $area, 'beneficios' => $beneficios, 'local' => $locais, 'empresa' => $empresa, 'verifica' => $verifica]);
+        return view('vagas.vaga', ['vaga' => $vaga, 'area' => $area, 'beneficios' => $beneficios, 'local' => $locais, 'empresa' => $empresa, 'verifica' => $verifica, 'veruser' => $veruser]);
     }
 
     public function candidatar(Request $request){
-       // $egresso = Egresso::where('users_id', Auth::user()->id)->first();
-
-       // $vagas = vagas::where('id', $request['id']);
 
         Cadastra::create([
             'egresso_id' => Auth::user()->egressos()->first()->id,

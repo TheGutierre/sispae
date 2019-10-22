@@ -17,7 +17,16 @@ Route::get('/', function () {
 
 Route::get('cadastro/empresas', function () {
 	return view('empresas.create');
+})->middleware('auth');
+
+Route::get('register/adm', function () {
+	return view('auth.registerAdm');
 });
+Route::post('register/adm', 'Auth\RegisterController@createAdm')->name('auth.registerAdm');
+
+Route::get('empresas/editar/{id}', 'EmpresaController@edit')->name('empresas.edit')->middleware('auth');
+
+Route::post('empresas/editar/', 'EmpresaController@update')->name('empresas.edit')->middleware('auth');
 
 Route::post('cadastro/empresas', 'EmpresaController@create')->name('empresas.create')->middleware('auth');
 

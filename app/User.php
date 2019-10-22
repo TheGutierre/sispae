@@ -22,7 +22,7 @@ class User extends Authenticatable
     /**
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'remember_token', 'created_at', 'updated_at'];
+    protected $fillable = ['name', 'email', 'password', 'tipo', 'remember_token', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
