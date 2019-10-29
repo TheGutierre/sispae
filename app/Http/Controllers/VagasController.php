@@ -76,6 +76,14 @@ class VagasController extends Controller
             ->orderBy('vagas.updated_at','DESC')
             ->paginate(15)
         ;
+        if(Auth::user()->tipo == "egresso"){
+            $verifica = Cadastra::where('egresso_id', Auth::user()->egressos()->first()->id)
+                ->get();
+        }
+        else{
+            $verifica = Cadastra::get();
+        }
+
         if(Auth::user()->tipo == "responsavel" || Auth::user()->tipo == "administrador"){
             $usuario = Auth::user()->responsaveis()->first();
             $veruser = 1;
@@ -88,10 +96,10 @@ class VagasController extends Controller
             $veruser = 0;
         }
 
-
-        return view('vagas.index', ['vagas' => $vagas, 'usuario' => $usuario, 'veruser' => $veruser]);
-        return ;
+        //return $verifica;
+        return view('vagas.index', ['vagas' => $vagas, 'usuario' => $usuario, 'veruser' => $veruser, 'verifica' => $verifica]);
     }
+
     public function edit($id, Request $request){
 
         $taskEmpresa = empresas::where('id', Auth::user()->responsaveis()->first()->empresas_id) ->first()
@@ -189,7 +197,7 @@ class VagasController extends Controller
             $veruser = 1;
         }
 
-        //return dd($verifica);
+
         return view('vagas.vaga', ['vaga' => $vaga, 'area' => $area, 'beneficios' => $beneficios, 'local' => $locais, 'empresa' => $empresa, 'verifica' => $verifica, 'veruser' => $veruser]);
     }
 
@@ -202,5 +210,49 @@ class VagasController extends Controller
         ]);
         Session::flash('message1', 'Você se candidatou a está vaga, agora é só aguardar. A empresa deverá entrar em contato com você. Boa sorte!');
         return back()->withInput();
+    }
+    public function minhasVagas(){
+        $vagas = vagas::where('empresas_id', Auth::user()->responsaveis()->first()->empresas_id)
+            ->join('empresas', 'vagas.empresas_id', 'empresas.id')
+            ->select('vagas.cargo as Cargo', 'vagas.vagas as Vagas',
+                'vagas.status as Status', 'vagas.id as ID', 'vagas.empresas_id as empresas_id')
+            ->orderBy('vagas.updated_at','DESC')
+            ->paginate(15)
+        ;
+        if(Auth::user()->tipo == "responsavel" || Auth::user()->tipo == "administrador"){
+            $usuario = Auth::user()->responsaveis()->first();
+            $veruser = 1;
+            if(Auth::user()->tipo == "administrador"){
+                $usuario = Auth::user()->first();
+            }
+        }
+        else{
+            $usuario = Auth::user()->first();
+            $veruser = 0;
+        }
+        return view('vagas.minhasVagas', ['vagas' => $vagas, 'usuario' => $usuario, 'veruser' => $veruser]);
+    }
+    public function candidatos($id){
+
+        $candidatos = Cadastra::where('vagas_id', $id)
+            ->join('vagas', 'cadastra.vagas_id', 'vagas.id')
+            ->join('egresso', 'cadastra.egresso_id', 'egresso.id')
+            ->join('users', 'egresso.users_id', 'users.id')
+            ->select('users.name as name', 'users.email as email')
+            ->orderBy('users.name')
+            ->paginate(20)
+            ;
+        if(Auth::user()->tipo == "responsavel" || Auth::user()->tipo == "administrador"){
+            $usuario = Auth::user()->responsaveis()->first();
+            $veruser = 1;
+            if(Auth::user()->tipo == "administrador"){
+                $usuario = Auth::user()->first();
+            }
+        }
+        else{
+            $usuario = Auth::user()->first();
+            $veruser = 0;
+        }
+        return view('vagas.candidatos', ['candidatos' => $candidatos, 'usuario' => $usuario, 'veruser' => $veruser]);
     }
 }

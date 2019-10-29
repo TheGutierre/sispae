@@ -48,6 +48,11 @@ Route::group(['as' => 'social.','prefix' => 'social'], function() {
 Route::get('vagas/cadastrar', function () {
 	return view('vagas.create');
 });
+
+Route::get('vagas/minha','VagasController@minhasVagas')->name('vagas.minhasVagas')->middleware('auth');
+
+Route::get('vagas/candidatos/{id}','VagasController@candidatos')->name('vagas.candidatos')->middleware('auth');
+
 Route::get('vagas/vaga/{id}','VagasController@vaga')->name('vagas.vaga')->middleware('auth');
 
 Route::post('vagas/vaga/', 'VagasController@candidatar')->name('vagas.vaga')->middleware('auth');
@@ -62,6 +67,7 @@ Route::group(['as' => 'vagas.','prefix' => 'vagas'], function() {
 	//Route::get('cadastrar', ['as' => 'cadastrar', 'uses' => 'VagasController@cadastrar', 'middleware' => 'auth']);
 	Route::post('cadastrar', ['as' => 'cadastrar', 'uses' => 'VagasController@cadastrar', 'middleware' => 'auth']);
 	Route::get('index', ['as' => 'index', 'uses' => 'VagasController@index', 'middleware' => 'auth']);
+	Route::post('index', ['as' => 'index', 'uses' => 'VagasController@verifica', 'middleware' => 'auth']);
 	});
 
 Route::post('enviarMensagem', ['as' => 'contato.enviar', 'uses' => 'HomeController@enviarMensagem']);

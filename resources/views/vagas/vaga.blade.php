@@ -93,11 +93,12 @@
                                         @if($veruser == "0")
                                         @if($verifica == "1")
                                             <div class="col-md-6 col-md-offset-4">
-                                                <button type="button" class="btn btn-danger">
-                                                    Você já se candidatou a esta vaga. Boa sorte!
-                                                </button>
-                                            </div>
+                                                    <button type="button" class="btn btn-danger">
+                                                        Você já se candidatou a esta vaga. Boa sorte!
+                                                    </button>
+                                                </div>
                                         @else
+                                            @if($vaga->status == "Disponível")
                                         <form method="POST" action="{{ route('vagas.vaga') }}">
                                             {{ csrf_field() }}
                                             <input name="id" type="hidden" class="form-control" id="id" value="{{$vaga->id}}">
@@ -107,9 +108,20 @@
                                                 </button>
                                             </div>
                                         </form>
+                                                @else
+                                                    <div class="col-md-6 col-md-offset-4">
+                                                        <button type="button" class="btn btn-danger">
+                                                            Vaga não disponível!
+                                                        </button>
+                                                    </div>
+                                                @endif
                                         @endif
                                             @else
-                                            ...
+                                            <div class="col-md-6 col-md-offset-4" >
+                                                <a href="/vagas/candidatos/{{$vaga->id}}" class="btn btn-adn">
+                                                    Cadidatos
+                                                </a>
+                                            </div>
                                             @endif
                                     </td>
 
